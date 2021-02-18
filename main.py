@@ -23,6 +23,7 @@ def cifar_transformer():
                                 std=[0.5, 0.5, 0.5]),
         ])
 
+
 def main(args):
     if args.dataset == 'cifar10':
         test_dataloader = data.DataLoader(
@@ -31,10 +32,10 @@ def main(args):
 
         train_dataset = CIFAR10(args.data_path)
 
-        args.num_images = 50000
-        args.num_val = 5000
-        args.budget = 2500
-        args.initial_budget = 5000
+        args.num_images = 5000
+        args.num_val = 500
+        args.budget = 250
+        args.initial_budget = 500
         args.num_classes = 10
     elif args.dataset == 'cifar100':
         test_dataloader = data.DataLoader(
@@ -78,7 +79,7 @@ def main(args):
     val_dataloader = data.DataLoader(train_dataset, sampler=val_sampler,
             batch_size=args.batch_size, drop_last=False)
             
-    args.cuda = args.cuda and torch.cuda.is_available()
+    args.cuda = True # args.cuda and torch.cuda.is_available()
     solver = Solver(args, test_dataloader)
 
     splits = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4]
@@ -118,6 +119,7 @@ def main(args):
                 batch_size=args.batch_size, drop_last=True)
 
     torch.save(accuracies, os.path.join(args.out_path, args.log_name))
+
 
 if __name__ == '__main__':
     args = arguments.get_args()
