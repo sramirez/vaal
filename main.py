@@ -32,10 +32,10 @@ def main(args):
 
         train_dataset = CIFAR10(args.data_path)
 
-        args.num_images = 5000
-        args.num_val = 500
-        args.budget = 250
-        args.initial_budget = 500
+        args.num_images = 50000
+        args.num_val = 5000
+        args.budget = 2500
+        args.initial_budget = 5000
         args.num_classes = 10
     elif args.dataset == 'cifar100':
         test_dataloader = data.DataLoader(
